@@ -18,7 +18,9 @@ namespace GraphQL
       services
           .AddGraphQLServer()
           .AddQueryType(d => d.Name("Query"))
-            .AddTypeExtension<SpeakerQueries>();
+            .AddTypeExtension<SpeakerQueries>()
+          .AddMutationType(d => d.Name("Mutation"))
+            .AddTypeExtension<SpeakerMutations>();
 
     }
 
