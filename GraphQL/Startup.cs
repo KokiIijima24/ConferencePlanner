@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ConferencePlanner.GraphQL;
 using ConferencePlanner.GraphQL.Data;
+using ConferencePlanner.GraphQL.Speakers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,7 +17,8 @@ namespace GraphQL
       services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite("Data Source=conferences.db"));
       services
           .AddGraphQLServer()
-          .AddQueryType<Query>();
+          .AddQueryType(d => d.Name("Query"))
+            .AddTypeExtension<SpeakerQueries>();
 
     }
 
