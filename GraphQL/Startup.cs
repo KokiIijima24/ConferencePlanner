@@ -1,5 +1,6 @@
-using ConferencePlanner.GraphQL.Data;
 using ConferencePlanner.GraphQL.Speakers;
+using GraphQL.Data;
+using GraphQL.DataLoader;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -14,13 +15,15 @@ namespace GraphQL
     // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
     public void ConfigureServices(IServiceCollection services)
     {
-      services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite("Data Source=conferences.db"));
+      services.AddPooledDbContextFactory<ApplicationDbContext>(options => options.UseSqlite("Data Source=conferences.db"));
+
       services
           .AddGraphQLServer()
           .AddQueryType(d => d.Name("Query"))
             .AddTypeExtension<SpeakerQueries>()
           .AddMutationType(d => d.Name("Mutation"))
-            .AddTypeExtension<SpeakerMutations>();
+            .AddTypeExtension<SpeakerMutations>()
+          .AddDataLoader<SpeakerByIdDataLoader>();
 
     }
 

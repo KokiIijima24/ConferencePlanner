@@ -1,4 +1,4 @@
-using ConferencePlanner.GraphQL.Data;
+using GraphQL.Data;
 
 namespace ConferencePlanner.GraphQL.Speakers
 {
