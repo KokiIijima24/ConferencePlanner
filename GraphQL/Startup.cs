@@ -1,6 +1,7 @@
-using ConferencePlanner.GraphQL.Speakers;
 using GraphQL.Data;
 using GraphQL.DataLoader;
+using GraphQL.Speakers;
+using GraphQL.Types;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -23,8 +24,10 @@ namespace GraphQL
             .AddTypeExtension<SpeakerQueries>()
           .AddMutationType(d => d.Name("Mutation"))
             .AddTypeExtension<SpeakerMutations>()
+          .AddType<SpeakerType>()
+          .EnableRelaySupport()
+          .AddDataLoader<SessionByIdDataLoader>()
           .AddDataLoader<SpeakerByIdDataLoader>();
-
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,9 +41,11 @@ namespace GraphQL
       app.UseRouting();
 
       app.UseEndpoints(endpoints =>
- {
-   endpoints.MapGraphQL();
- });
+      {
+        endpoints.MapGraphQL();
+      });
+
+      app.UseGraphQLVoyager("/graphql-voyager");
     }
   }
 }

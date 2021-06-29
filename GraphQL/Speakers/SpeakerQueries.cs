@@ -9,7 +9,7 @@ using GraphQL.Data;
 using GraphQL.DataLoader;
 using System.Threading;
 
-namespace ConferencePlanner.GraphQL.Speakers
+namespace GraphQL.Speakers
 {
   [ExtendObjectType(Name = "Query")]
   public class SpeakerQueries

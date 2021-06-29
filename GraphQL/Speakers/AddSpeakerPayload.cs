@@ -1,14 +1,17 @@
+using System.Collections.Generic;
+using GraphQL.Common;
 using GraphQL.Data;
 
-namespace ConferencePlanner.GraphQL.Speakers
+namespace GraphQL.Speakers
 {
-  public class AddSpeakerPayload
+  public class AddSpeakerPayload : SpeakerPayloadBase
   {
-    public AddSpeakerPayload(Speaker speaker)
+    public AddSpeakerPayload(Speaker speaker) : base(speaker)
     {
-      Speaker = speaker;
     }
 
-    public Speaker Speaker { get; }
+    public AddSpeakerPayload(IReadOnlyList<UserError> errors) : base(errors)
+    {
+    }
   }
 }

@@ -4,7 +4,7 @@ using GraphQL.Data;
 using HotChocolate;
 using HotChocolate.Types;
 
-namespace ConferencePlanner.GraphQL.Speakers
+namespace GraphQL.Speakers
 {
   [ExtendObjectType(Name = "Mutation")]
   public class SpeakerMutations
